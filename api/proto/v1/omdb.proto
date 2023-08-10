@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package omdb;
+
+option go_package = "/omdb"; // customize based on your structure
+
+service OMDBService {
+  rpc GetMovieByID(GetMovieByIDRequest) returns (GetMovieByIDResponse) {}
+  rpc SearchMovies(SearchMoviesRequest) returns (SearchMoviesResponse) {}
+}
+
+message GetMovieByIDRequest {
+  string id = 1;
+}
+
+message GetMovieByIDResponse {
+  string id = 1 [json_name="imdbID"];
+  string title = 2 [json_name="Title"];
+  string year = 3 [json_name="Year"];
+  string rated = 4 [json_name="Rated"];
+  string genre = 5 [json_name="Genre"];
+  string plot = 6 [json_name="Plot"];
+  string director = 7 [json_name="Director"];
+  repeated string actors = 8 [json_name="Actor"];
+  string language = 9 [json_name="Language"];
+  string country = 10 [json_name="Country"];
+  string type = 11 [json_name="Type"];
+  string poster_url = 12 [json_name="Poster"];
+}
+message SearchMoviesRequest {
+  string query = 1;
+  string type = 2;
+  uint64 page = 3;
+}
+message SearchMoviesResponse {
+  repeated MovieResult movies = 1 [json_name="Search"];
+  uint64 total_results = 2;
+}
+message MovieResult {
+  string id = 1 [json_name="imdbID"];
+  string title = 2 [json_name="Title"];
+  string year = 3 [json_name="Year"];
+  string type = 4 [json_name="Type"];
+  string poster_url = 5 [json_name="Poster"];
+}
