@@ -4,8 +4,9 @@ import (
 	"log"
 	"net"
 
-	grpcS16 "github.com/KelwinTan/s16-grpc/api/grpc"
+	grpcS16 "github.com/KelwinTan/s16-grpc/api/grpc/omdb"
 	"github.com/KelwinTan/s16-grpc/api/proto/v1/omdb"
+	"github.com/KelwinTan/s16-grpc/app"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
@@ -15,6 +16,8 @@ const (
 )
 
 func main() {
+
+	app.Init()
 
 	lis, err := net.Listen("tcp", PORT)
 	if err != nil {

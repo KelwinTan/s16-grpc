@@ -8,3 +8,6 @@ gen-proto: ## for generating protobufs
 	protoc --go_out=./omdb --go_opt=paths=source_relative \
     --go-grpc_out=./omdb --go-grpc_opt=paths=source_relative \
     omdb.proto
+
+mock:
+	mockgen -source=./api/proto/v1/omdb/omdb.pb.go OmdbServiceClient
